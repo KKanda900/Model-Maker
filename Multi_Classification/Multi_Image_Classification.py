@@ -3,12 +3,11 @@ import numpy as np
 import pandas as pd 
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' # dont show any tensorflow warning messages
-import matplotlib.pyplot as plt
-import cv2, dill
+import cv2
 
-# Keras libraries used for making the model
-import keras
-from keras.utils import to_categorical
+# Keras libraries used for making the model and tensorflow
+import tensorflow, keras
+from tensorflow.keras.utils import to_categorical
 from keras.layers import Dense,Conv2D,Flatten,MaxPool2D,Dropout
 from keras.models import Sequential
 
@@ -135,12 +134,15 @@ class Multi_Image_Classification:
     # classifies images based on the model and the selected image
     def classify_image(self, image, model):
         
-        checkImage = image[0]
-        checklabel = image[0]
+        checkImage = image[0] # get the image
+        checklabel = image[0] # get the label of the image
 
-        predict = model.predict(np.array(checkImage))
-        predicted_label = self.labels[np.argmax(predict)]
+        predict = model.predict(np.array(checkImage)) # get the predicition 
+        predicted_label = self.labels[np.argmax(predict)] # get the predicted label
                 
         return predicted_label # return the predicted label from the labels provided by the user
+
+
+
 
 
